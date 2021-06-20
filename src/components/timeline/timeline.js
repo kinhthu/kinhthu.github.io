@@ -26,7 +26,7 @@ const Timeline = ({ className }) => (
                 ({job.duration || 'present'})
               </small>
             </h2>
-            <p>{job.description}</p>
+            <p dangerouslySetInnerHTML={{ __html: job.description }}></p>
           </div>
         </div>
       </article>

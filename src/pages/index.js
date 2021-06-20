@@ -79,7 +79,7 @@ const Home = ({ className, location }) => {
           <Separator />
           <Timeline />
           <Separator />
-          {siteConfig.githubUsername && <Repositories />}
+          {/* {siteConfig.githubUsername && <Repositories />} */}
         </Container>
       </Wrapper>
     </Layout>

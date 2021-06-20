@@ -1,27 +1,30 @@
 module.exports = {
-  siteTitle: 'Hi! I\'m Francisco!',
-  siteDescription: `Create your online curriculum in just a few minutes with this starter`,
-  keyWords: ['gatsbyjs', 'react', 'curriculum'],
-  authorName: 'Francisco Santos',
-  twitterUsername: '_franciscodf',
-  githubUsername: 'santosfrancisco',
-  authorAvatar: '/images/avatar.jpeg',
-  authorDescription: `Developer, passionate about what I do. Always interested in how the sites were made, I started to study HTML by hobby. <br />
-    In 2012 I started working as a support technician and I approached the developers.
-    In 2015, I started to study C # and started to contribute with the team giving maintenance in an application in C # and .NET. <br />
-    I currently work as a frontend developer and mainly work with <strong>Javascript, NodeJS e React.</strong>`,
+  siteTitle: 'Hi! I\'m Kinh Thu!',
+  siteDescription: `This is some information about Kinh Thu`,
+  keyWords: ['Kinh Thu', 'Kinh Thu CV', 'Portfolio', 'Le Truong Kinh Thu'],
+  authorName: 'Kinh Thu',
+  twitterUsername: 'Kinh_Thu_',
+  githubUsername: 'kinhthu',
+  authorAvatar: '/images/avatar.png',
+  authorDescription: `<q><i>Do <strong>WHAT</strong> you <strong>LOVE</strong>, and <strong>LOVE</strong> what you <strong>DO</strong></i></q>.<br/><br/>
+  I love programing and happy with creating webs and mobile apps, so I start to learn Programing in 2010 at the University of Science.<br/><br/>
+  I graduated in Sep 2014 with A <i><strong>Bachelor of Science in Information Technology, Honors Program</strong></i> <strong style="color:#E1701A">(GPA: 8.52)</strong><br/><br/>
+
+- In 2015 I started working as a .NET develop at CSC Vietnam (currently is DXC Technology Vietnam).<br/>
+- In 2017, I started working as a frontend developer at Logix Technology with Angular and Ionic.<br/>
+- And from 2019 to the present, I work as a frontend / mobile developer at Launch Deck and work with <strong>Javascript, ReactJS, NextJS and React Native</strong>.`,
   skills: [
     {
       name: 'HTML',
-      level: 70
+      level: 80
     },
     {
       name: 'CSS',
-      level: 60
+      level: 70
     },
     {
       name: 'Javascript',
-      level: 50
+      level: 70
     },
     {
       name: 'NodeJs',
@@ -29,86 +32,105 @@ module.exports = {
     },
     {
       name: 'React',
+      level: 70
+    },
+    {
+      name: 'React Native',
       level: 60
     },
     {
       name: 'Git',
       level: 70
     },
+    {
+      name: 'Angular 4',
+      level: 40
+    },
+    {
+      name: '.Net',
+      level: 40
+    },
+    {
+      name: 'SQL Server',
+      level: 40
+    },
     /* more skills here */
   ],
   jobs: [
     /* more jobs here */
     {
-      company: "Gympass",
+      company: "Launch Deck LLC",
       begin: {
-        month: 'sep',
+        month: 'Jun',
         year: '2019'
       },
       duration: null,
-      occupation: "Frontend developer",
-      description: "I am part of the Corporate team, responsible for the development and maintenance of the employee management platform, giving more and more autonomy to partner companies."
+      occupation: "Frontend / Mobile developer",
+      description: `I have responsibility for the development and maintenance of the <a href="https://gotruckster.com/" target="_blank">website</a> to order and request catering food trucks in the US. <br/><br/>
+      Besides, I also implement and maintain some other projects for health care, <a href="https://tickettamer.com/" target="_blank">the law</a> by the web app and <a href="https://urgentadmin.com/preview" target="_blank">mobile app</a>.
+      `
   
     },  {
-      company: "Lendico",
+      company: "Logix Technology Vietnam",
       begin: {
-        month: 'apr',
-        year: '2018'
+        month: 'Jun',
+        year: '2017'
       },
-      duration: null,
+      duration: "2 yrs",
       occupation: "Frontend developer",
-      description: "I integrate the Frontend team responsible for developing and maintaining the online lending platform."
+      description: `I worked on Mulesoft Service Bus to integrate all available systems (with different technology) and help to transfer data between them.<br/><br/>
+      Besides, I created a mobile application to manage honey from farm to laboratory.`
   
     }, {
-      company: "Anapro",
+      company: "CSC Vietnam",
       begin: {
-        month: 'dec',
-        year: '2016'
+        month: 'May',
+        year: '2015'
       },
-      duration: '1 yr e 5 mos',
-      occupation: "Fullstack developer",
-      description: "Development and maintenance, corrective and preventive, of web applications for the real estate market."
+      duration: '2 yrs e 1 mo',
+      occupation: ".Net developer",
+      description: "Development and maintenance of the system using in the healthcare domain. It manages documents from the laboratory and hospital related to drugs and health"
     }, {
-      company: "Anapro",
+      company: "IDTEK SJC",
       begin: {
-        month: 'set',
-        year: '2012'
+        month: 'Apr',
+        year: '2013'
       },
-      duration: '4 yrs e 3 mos',
-      occupation: "Support Technician",
-      description: "Responsible for the implementation and parameterization of the system, training and customer support. Acting also in person in real estate launches guaranteeing the success and good use of the tool."
+      duration: '1 yr',
+      occupation: "PHP Develop",
+      description: "I worked as an internship and responsible on implement and maintain the system that used to manage a travel enterprise"
   
     },
   ],
   portifolio: [
-    {
-      image: "/images/gatsby-starter-cv.png",
-      description: "Gatsby starter CV template",
-      url: "https://www.gatsbyjs.org/starters/santosfrancisco/gatsby-starter-cv/"
-    },
-    {
-      image: "/images/awesome-grid.png",
-      description: "Responsive grid for ReactJS",
-      url: "https://github.com/santosfrancisco/react-awesome-styled-grid"
-    },
+    // {
+    //   image: "/images/gatsby-starter-cv.png",
+    //   description: "Gatsby starter CV template",
+    //   url: "https://www.gatsbyjs.org/starters/santosfrancisco/gatsby-starter-cv/"
+    // },
+    // {
+    //   image: "/images/awesome-grid.png",
+    //   description: "Responsive grid for ReactJS",
+    //   url: "https://github.com/santosfrancisco/react-awesome-styled-grid"
+    // },
     /* more portifolio items here */
   ],
   social: {
-    twitter: "https://twitter.com/_franciscodf",
-    linkedin: "https://www.linkedin.com/in/santos-francisco",
-    github: "https://github.com/santosfrancisco",
-    email: "yoshi.df@gmail.com"
+    twitter: "https://twitter.com/Kinh_Thu_",
+    linkedin: "https://www.linkedin.com/in/letruongkinhthu/",
+    github: "https://github.com/kinhthu",
+    email: "letruongkinhthu@gmail.com"
   },
-  siteUrl: 'https://santosfrancisco.github.io/gatsbystarter-cv',
-  pathPrefix: '/gatsby-starter-cv', // Note: it must *not* have a trailing slash.
+  siteUrl: 'https://kinhthu.github.io',
+  pathPrefix: '/', // Note: it must *not* have a trailing slash.
   siteCover: '/images/cover.jpeg',
-  googleAnalyticsId: 'UA-000000000-1',
+  googleAnalyticsId: 'UA-000000001-1',
   background_color: '#ffffff',
   theme_color: '#25303B',
   fontColor: "#000000cc",
   enableDarkmode: true, // If true, enables dark mode switch
   display: 'minimal-ui',
-  icon: 'src/assets/gatsby-icon.png',
+  icon: 'src/assets/icon.png',
   headerLinks: [
     {
       label: 'Home',
