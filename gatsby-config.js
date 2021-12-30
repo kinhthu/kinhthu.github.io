@@ -11,6 +11,7 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-sass`,
     `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -22,16 +23,6 @@ module.exports = {
         theme_color: config.theme_color,
         display: config.display,
         icon: config.icon,
-      },
-    },
-    `gatsby-plugin-styled-components`,
-    {
-      resolve: `gatsby-plugin-google-gtag`,
-      options: {
-        // You can add multiple tracking ids and a pageview event will be fired for all of them.
-        trackingIds: [
-          config.googleAnalyticsId // Google Analytics / GA
-        ],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

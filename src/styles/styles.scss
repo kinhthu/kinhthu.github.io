@@ -1,0 +1,202 @@
+.left-panel {
+  background-color: var(--primary);
+  min-height: 100vh;
+  padding: 40px 20px;
+
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      outline: 8px solid var(--border-img);
+    }
+    &__name {
+      font-size: 24px;
+      color: var(--white);
+      margin: 24px 0;
+    }
+    &__social {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--border-img);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:hover {
+        background-color: var(--light-blue);
+        cursor: pointer;
+      }
+    }
+  }
+  &__navigation {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 20px;
+    .nav-item {
+      font-size: 16px;
+      color: var(--gray-text);
+      padding-top: 24px;
+      font-weight: normal;
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+      &--active {
+        color: white;
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.right-panel {
+  background-image: url(../assets/background.jpg);
+  background-size: cover;
+  position: relative;
+  height: 100vh;
+  overflow-y: scroll;
+  padding: 0;
+
+  .intro {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 200px;
+    &__name {
+      color: white;
+      font-size: 64px;
+      text-shadow: 5px 5px 5px black;
+    }
+    &__job {
+      color: white;
+      font-size: 24px;
+      text-shadow: 5px 5px 5px black;
+      &--highlight {
+        margin-left: 8px;
+        border-bottom: solid 4px var(--light-blue);
+        text-shadow: 5px 5px 5px black;
+      }
+    }
+  }
+  &__content,
+  &__skills,
+  &__certificates {
+    background-color: white;
+    padding: 60px 16px;
+  }
+  &__experiences,
+  &__education {
+    background-color: #f5f8fd;
+    padding: 60px 16px;
+  }
+  .section {
+    &__title {
+      font-size: 32px;
+      color: var(--text-color);
+      &::after {
+        display: block;
+        content: '';
+        width: 60px;
+        height: 4px;
+        background-color: var(--light-blue);
+      }
+    }
+    &__description {
+      font-size: 16px;
+      font-weight: 300;
+      margin-top: 20px;
+    }
+    &__avatar {
+      width: 100%;
+      height: auto;
+    }
+    &__job {
+      font-size: 26px;
+      color: var(--text-color);
+    }
+    &__info__item {
+      height: 40px;
+      &__title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-left: 8px;
+      }
+      &__value {
+        font-size: 16px;
+        font-weight: 300;
+        margin-left: 8px;
+      }
+    }
+  }
+  .skill-item {
+    margin-bottom: 24px;
+    &__header {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__name {
+      margin-bottom: 8px;
+      font-weight: 400;
+      font-size: 14px;
+    }
+  }
+}
+.timeline {
+  border-left: solid 2px var(--text-color);
+  padding-left: 20px;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    position: absolute;
+    border: solid 2px var(--text-color);
+    border-radius: 50%;
+    top: 0;
+    left: -8px;
+  }
+  &__title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 24px;
+  }
+  &__date {
+    font-size: 14px;
+    background-color: #e4edf9;
+    width: fit-content;
+    padding: 5px 8px;
+    border-radius: 4px;
+  }
+  &__description {
+    font-size: 18px;
+    font-weight: 300;
+  }
+  &__parent {
+    position: relative;
+    &::before {
+      position: absolute;
+      content: '';
+      border-left: solid 2px var(--text-color);
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+  }
+}
