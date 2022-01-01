@@ -1,14 +1,14 @@
-const isVisible = el => {
-  let rect = el.boundingClientRect
+export const isVisible = el => {
+  let rect = el.getBoundingClientRect()
 
   if (!rect) return true
 
   const screenHeight = window.innerHeight || document.documentElement.clientHeight
-
+// console.log(el, rect)
   return (
-    (rect.top <= 0 && rect.bottom >= 0)
-    || (rect.bottom >= screenHeight && rect.top <= screenHeight)
-    || (rect.top >= 0 && rect.bottom <= screenHeight)
+    (rect.top <= 100 && rect.bottom >= 0)
+    // || (rect.bottom >= screenHeight && rect.top <= screenHeight)
+    // || (rect.top >= 0 && rect.bottom <= screenHeight)
   )
 }
 

@@ -8,12 +8,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
+    .avatar-box {
+      background-color: var(--border-img);
+      width: 116px;
+      height: 116px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all ease 0.3s;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
     .avatar {
       width: 100px;
       height: 100px;
       border-radius: 50%;
-      outline: 8px solid var(--border-img);
     }
     &__name {
       font-size: 24px;
@@ -50,6 +61,10 @@
       padding-top: 24px;
       font-weight: normal;
       cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+
       &:hover {
         color: white;
       }
@@ -68,7 +83,15 @@
   height: 100vh;
   overflow-y: scroll;
   padding: 0;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  @media only screen and (max-width: 768px) {
+    background-position: center;
+  }
   .intro {
     width: 100%;
     height: 100%;
@@ -76,17 +99,26 @@
     flex-direction: column;
     justify-content: center;
     padding-left: 200px;
+    @media only screen and (max-width: 768px) {
+      padding-left: 15px;
+    }
     &__name {
       color: white;
       font-size: 64px;
       text-shadow: 5px 5px 5px black;
+      @media only screen and (max-width: 768px) {
+        font-size: 40px;
+      }
     }
     &__job {
       color: white;
       font-size: 24px;
       text-shadow: 5px 5px 5px black;
+      @media only screen and (max-width: 768px) {
+        font-size: 20px;
+      }
       &--highlight {
-        margin-left: 8px;
+        margin-left: 4px;
         border-bottom: solid 4px var(--light-blue);
         text-shadow: 5px 5px 5px black;
       }
@@ -99,9 +131,13 @@
     padding: 60px 16px;
   }
   &__experiences,
+  &__contact,
   &__education {
     background-color: #f5f8fd;
     padding: 60px 16px;
+  }
+  &__contact {
+    min-height: 100vh;
   }
   .section {
     &__title {
@@ -123,6 +159,9 @@
     &__avatar {
       width: 100%;
       height: auto;
+      @media only screen and (max-width: 768px) {
+        margin-bottom: 24px;
+      }
     }
     &__job {
       font-size: 26px;
@@ -156,7 +195,6 @@
   }
 }
 .timeline {
-  border-left: solid 2px var(--text-color);
   padding-left: 20px;
   position: relative;
 
@@ -199,4 +237,93 @@
       left: 0;
     }
   }
+}
+.contact-item {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 24px;
+
+  &__icon {
+    background-color: var(--blue-background);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media only screen and (max-width: 768px) {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  &__info {
+    margin-left: 8px;
+    color: black;
+    @media only screen and (max-width: 768px) {
+      h5 {
+        font-size: 16px;
+      }
+      p {
+        font-size: 14px;
+      }
+    }
+    > p {
+      margin: 0;
+    }
+  }
+}
+.contact-bottom-text {
+  text-align: center;
+  margin-top: 150px;
+  font-size: 32px;
+}
+.go-top-btn {
+  z-index: 100;
+  background-color: var(--light-blue);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  cursor: pointer;
+}
+.mobile-menu {
+  z-index: 2000;
+  background-color: var(--light-blue);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  cursor: pointer;
+  @media only screen and (max-width: 768px) {
+    display: flex;
+  }
+}
+.for-desktop {
+  display: block;
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+}
+.for-mobile {
+  display: none;
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
+}
+.offcanvas-body {
+  padding: 0;
 }
