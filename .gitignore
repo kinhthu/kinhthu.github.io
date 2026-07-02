@@ -67,3 +67,15 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+# Next.js
+.next/
+out/
+
+# Local env files
+.env*.local
+
+# Logs and Runner
+agy_stderr.txt
+agy_stdout.txt
+run_agy.ps1
