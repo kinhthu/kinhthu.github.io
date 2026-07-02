@@ -33,7 +33,7 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-slate-950/80 backdrop-blur-md border-b border-slate-800/50 py-4 shadow-lg shadow-indigo-950/10"
+          ? "bg-white/80 backdrop-blur-md border-b border-slate-200/50 py-4 shadow-lg shadow-slate-100/50"
           : "bg-transparent py-6"
       }`}
     >
@@ -41,7 +41,7 @@ export default function Header() {
         {/* Logo / Title */}
         <a
           href="#home"
-          className="text-lg font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400 hover:opacity-80 transition-opacity"
+          className="text-lg font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-cyan-600 hover:opacity-80 transition-opacity"
         >
           {portfolioData.authorName.toUpperCase()}
         </a>
@@ -52,19 +52,19 @@ export default function Header() {
             <a
               key={link.label}
               href={link.href}
-              className="text-sm font-medium text-slate-300 hover:text-indigo-400 transition-colors duration-200"
+              className="text-sm font-medium text-slate-600 hover:text-indigo-600 transition-colors duration-200"
             >
               {link.label}
             </a>
           ))}
           
           {/* Social Icons */}
-          <div className="flex items-center space-x-4 border-l border-slate-800 pl-6">
+          <div className="flex items-center space-x-4 border-l border-slate-200 pl-6">
             <a
               href={portfolioData.social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-indigo-400 transition-colors"
+              className="text-slate-500 hover:text-indigo-600 transition-colors"
               aria-label="GitHub"
             >
               <FaGithub size={20} />
@@ -73,14 +73,14 @@ export default function Header() {
               href={portfolioData.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-indigo-400 transition-colors"
+              className="text-slate-500 hover:text-indigo-600 transition-colors"
               aria-label="LinkedIn"
             >
               <FaLinkedin size={20} />
             </a>
             <a
               href={`mailto:${portfolioData.social.email}`}
-              className="text-slate-400 hover:text-indigo-400 transition-colors"
+              className="text-slate-500 hover:text-indigo-600 transition-colors"
               aria-label="Email"
             >
               <FaEnvelope size={20} />
@@ -91,7 +91,7 @@ export default function Header() {
         {/* Mobile Menu Toggler */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-slate-300 hover:text-indigo-400 transition-colors focus:outline-none"
+          className="md:hidden text-slate-600 hover:text-indigo-600 transition-colors focus:outline-none"
           aria-label="Toggle Menu"
         >
           {isOpen ? <HiX size={26} /> : <HiMenu size={26} />}
@@ -100,14 +100,14 @@ export default function Header() {
 
       {/* Mobile Drawer */}
       <div
-        className={`md:hidden fixed inset-y-0 right-0 w-64 bg-slate-950/95 backdrop-blur-lg border-l border-slate-800/80 shadow-2xl p-6 transition-transform duration-300 ease-in-out transform ${
+        className={`md:hidden fixed inset-y-0 right-0 w-64 bg-white/95 backdrop-blur-lg border-l border-slate-200 shadow-2xl p-6 transition-transform duration-300 ease-in-out transform ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex justify-end mb-8">
           <button
             onClick={() => setIsOpen(false)}
-            className="text-slate-400 hover:text-indigo-400 transition-colors"
+            className="text-slate-500 hover:text-indigo-600 transition-colors"
             aria-label="Close Menu"
           >
             <HiX size={26} />
@@ -120,18 +120,18 @@ export default function Header() {
               key={link.label}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="text-base font-semibold text-slate-300 hover:text-indigo-400 transition-colors duration-200"
+              className="text-base font-semibold text-slate-700 hover:text-indigo-600 transition-colors duration-200"
             >
               {link.label}
             </a>
           ))}
           
-          <div className="pt-6 border-t border-slate-800 flex items-center space-x-6 justify-center">
+          <div className="pt-6 border-t border-slate-200 flex items-center space-x-6 justify-center">
             <a
               href={portfolioData.social.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-indigo-400 transition-colors"
+              className="text-slate-500 hover:text-indigo-600 transition-colors"
               aria-label="GitHub"
             >
               <FaGithub size={22} />
@@ -140,14 +140,14 @@ export default function Header() {
               href={portfolioData.social.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-slate-400 hover:text-indigo-400 transition-colors"
+              className="text-slate-500 hover:text-indigo-600 transition-colors"
               aria-label="LinkedIn"
             >
               <FaLinkedin size={22} />
             </a>
             <a
               href={`mailto:${portfolioData.social.email}`}
-              className="text-slate-400 hover:text-indigo-400 transition-colors"
+              className="text-slate-500 hover:text-indigo-600 transition-colors"
               aria-label="Email"
             >
               <FaEnvelope size={22} />

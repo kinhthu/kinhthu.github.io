@@ -102,32 +102,32 @@ export default function Projects() {
         return "bg-blue-500";
       case "react":
       case "react native":
-        return "bg-cyan-400";
+        return "bg-cyan-500";
       case "html":
         return "bg-orange-500";
       case "css":
-        return "bg-indigo-500";
+        return "bg-indigo-600";
       case "angular":
         return "bg-red-600";
       case "php":
-        return "bg-purple-600";
+        return "bg-purple-655";
       case "c#":
         return "bg-green-600";
       default:
-        return "bg-slate-500";
+        return "bg-slate-400";
     }
   };
 
   return (
-    <section id="projects" className="py-24 bg-slate-900/10 relative">
+    <section id="projects" className="py-24 relative bg-slate-50/50">
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Title */}
         <div className="flex flex-col items-center text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white mb-4 relative inline-block">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-4 relative inline-block">
             Projects & Portfolio
-            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-indigo-500 rounded-full"></span>
+            <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-1 bg-indigo-600 rounded-full"></span>
           </h2>
-          <p className="text-slate-400 text-sm tracking-wider uppercase font-medium mt-2">
+          <p className="text-slate-500 text-sm tracking-wider uppercase font-medium mt-2">
             Some of my recent work {isFallback && "(Curated List)"}
           </p>
         </div>
@@ -138,17 +138,17 @@ export default function Projects() {
             {[1, 2, 3, 4, 5, 6].map((i) => (
               <div
                 key={i}
-                className="bg-slate-900/20 border border-slate-900 p-6 rounded-3xl h-60 animate-pulse flex flex-col justify-between"
+                className="bg-white border border-slate-200 p-6 rounded-3xl h-60 animate-pulse flex flex-col justify-between"
               >
                 <div className="space-y-4">
-                  <div className="w-10 h-10 bg-slate-800 rounded-xl"></div>
-                  <div className="w-2/3 h-5 bg-slate-800 rounded-md"></div>
+                  <div className="w-10 h-10 bg-slate-100 rounded-xl"></div>
+                  <div className="w-2/3 h-5 bg-slate-100 rounded-md"></div>
                   <div className="space-y-2">
-                    <div className="w-full h-3 bg-slate-800 rounded-md"></div>
-                    <div className="w-5/6 h-3 bg-slate-800 rounded-md"></div>
+                    <div className="w-full h-3 bg-slate-100 rounded-md"></div>
+                    <div className="w-5/6 h-3 bg-slate-100 rounded-md"></div>
                   </div>
                 </div>
-                <div className="w-full h-4 bg-slate-800 rounded-md"></div>
+                <div className="w-full h-4 bg-slate-100 rounded-md"></div>
               </div>
             ))}
           </div>
@@ -158,12 +158,12 @@ export default function Projects() {
             {repos.map((repo) => (
               <div
                 key={repo.id}
-                className="bg-slate-900/30 border border-slate-800/80 hover:border-indigo-500/30 p-6 rounded-3xl backdrop-blur-xl shadow-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-indigo-950/20 flex flex-col justify-between group h-64"
+                className="bg-white border border-slate-200/80 hover:border-indigo-600/30 p-6 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group h-64"
               >
                 <div>
                   {/* Card Header */}
                   <div className="flex items-center justify-between mb-4">
-                    <div className="p-3 bg-slate-950/60 rounded-2xl text-indigo-400 group-hover:text-cyan-400 transition-colors duration-300">
+                    <div className="p-3 bg-slate-50 rounded-2xl text-indigo-600 group-hover:text-cyan-600 transition-colors duration-300">
                       <FaFolder size={22} />
                     </div>
                     
@@ -171,7 +171,7 @@ export default function Projects() {
                       href={repo.html_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-500 hover:text-white transition-colors duration-200"
+                      className="text-slate-400 hover:text-slate-700 transition-colors duration-200"
                       aria-label="Visit project"
                     >
                       <FaExternalLinkAlt size={16} />
@@ -179,18 +179,18 @@ export default function Projects() {
                   </div>
 
                   {/* Project Name */}
-                  <h3 className="text-lg font-bold text-white mb-2 tracking-tight group-hover:text-indigo-400 transition-colors">
+                  <h3 className="text-lg font-bold text-slate-900 mb-2 tracking-tight group-hover:text-indigo-600 transition-colors">
                     {repo.name}
                   </h3>
 
                   {/* Project Description */}
-                  <p className="text-slate-400 text-sm line-clamp-3 leading-relaxed">
+                  <p className="text-slate-600 text-sm line-clamp-3 leading-relaxed">
                     {repo.description || "No description available for this repository."}
                   </p>
                 </div>
 
                 {/* Card Footer */}
-                <div className="flex items-center justify-between pt-4 border-t border-slate-900 mt-4 text-xs font-mono text-slate-500">
+                <div className="flex items-center justify-between pt-4 border-t border-slate-100 mt-4 text-xs font-mono text-slate-400">
                   {/* Language */}
                   <div className="flex items-center space-x-2">
                     <span
@@ -198,7 +198,7 @@ export default function Projects() {
                         repo.language
                       )}`}
                     ></span>
-                    <span className="font-semibold text-slate-400">
+                    <span className="font-semibold text-slate-655">
                       {repo.language || "Web"}
                     </span>
                   </div>
@@ -210,7 +210,7 @@ export default function Projects() {
                       <span>{repo.stargazers_count}</span>
                     </span>
                     <span className="flex items-center space-x-1">
-                      <FaCodeBranch size={12} className="text-indigo-400" />
+                      <FaCodeBranch size={12} className="text-indigo-600" />
                       <span>{repo.forks_count}</span>
                     </span>
                   </div>
