@@ -31,7 +31,7 @@ export default function Hero() {
 
       <div className="max-w-6xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-12 gap-12 items-center relative z-10">
         {/* Left column: Text content */}
-        <div className="md:col-span-7 flex flex-col justify-center space-y-6 text-center md:text-left">
+        <div className="md:col-span-7 flex flex-col justify-center items-center md:items-start space-y-6 text-center md:text-left">
           <span className="text-sm font-bold tracking-widest text-indigo-600 uppercase">
             Welcome to my space
           </span>

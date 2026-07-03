@@ -1,128 +1,98 @@
-# Kế Hoạch Kỹ Thuật: Đập đi xây dựng lại Portfolio bằng Next.js & Tailwind CSS
+# Kế hoạch Kỹ thuật: Điều chỉnh Giao diện và Góp phần Tối ưu hóa Stylesheet
+## Kinh Thu Portfolio Redesign
 
-## Mục tiêu & phạm vi
-- **Mục tiêu**: Thay thế toàn bộ mã nguồn Gatsby v2 (lạc hậu, chạy Node v14) của trang Portfolio `kinhthu.github.io` bằng dự án Next.js mới nhất sử dụng App Router, chạy được trên Node.js hiện đại (v18, v20, v22) và sử dụng Tailwind CSS để thiết kế giao diện tối cao cấp (Premium Dark Theme).
-- **Phạm vi**:
-  - Dọn dẹp toàn bộ mã nguồn và tệp tin Gatsby v2 cũ, chỉ giữ lại `.git`, `.gitignore`, `README.md` và thư mục `.agents`/`agents`.
-  - Khởi tạo dự án Next.js (App Router) mới bằng `npx create-next-app` hoặc cấu hình tương đương tương thích với Node.js v18+.
-  - Xây dựng lại các Section: Hero (typing effect), About Me, Experience Timeline, Skills, Projects (đọc GitHub API + static fallback), và Header/Footer.
-  - Hỗ trợ Responsive hoàn toàn trên Mobile và Desktop.
-  - Cấu hình Static HTML Export (`output: 'export'`) vì trang được triển khai trên GitHub Pages (`kinhthu.github.io`).
+Tài liệu này trình bày phân tích yêu cầu và kế hoạch kỹ thuật chi tiết để điều chỉnh giao diện của trang portfolio cá nhân. Mục tiêu là làm cho giao diện tươi sáng, hiện đại (không dùng dark mode mặc định), tổ chức lại stylesheet gọn gàng, căn chỉnh lại các phần tử (centering) hợp lý và tối ưu hóa UI của các section/field.
 
-## Phương án
-- **Công nghệ cốt lõi**:
-  - **Framework**: Next.js App Router (bản mới nhất v14/v15).
-  - **CSS**: Tailwind CSS.
-  - **Icon**: `react-icons`.
-  - **Animation**: Tailwind transitions & Custom keyframe animations (cho typing effect và hover).
-- **Lý do lựa chọn**:
-  - Next.js cung cấp cấu trúc App Router cực kỳ sạch sẽ, hỗ trợ Static Export dễ dàng thông qua `output: 'export'`.
-  - Tailwind CSS giúp xây dựng giao diện tùy biến nhanh chóng mà không cần viết file CSS riêng lẻ cồng kềnh, giảm nguy cơ xung đột.
-  - Sử dụng GitHub Pages yêu cầu xuất ra thư mục tĩnh (`out/`), Next.js hỗ trợ trực tiếp việc này.
-- **Phương án bị loại bỏ**:
-  - *Gatsby v4/v5*: Dù nâng cấp Gatsby khả thi, nhưng hệ sinh thái plugin Gatsby khá cồng kềnh và dễ lỗi phiên bản khi Node.js thay đổi. Next.js phổ biến và ổn định hơn.
-  - *React SPA thuần*: Next.js cung cấp tối ưu hóa ảnh, font và cấu trúc routing tốt hơn cho SEO.
+---
 
-## Thiết kế kỹ thuật
-### 1. Cấu trúc thư mục dự kiến
-```
-wt-d4cb3a31912044bdb7fd7ae3cab0c7a9/
-├── public/                  # Các file tĩnh (favicon, avatar, cover)
-│   └── images/
-│       ├── avatar.png       # Kế thừa từ static/images cũ
-│       └── cover.jpeg       # Kế thừa từ static/images cũ
-├── src/
-│   ├── app/
-│   │   ├── layout.js        # Cấu hình Layout, Font (Inter), SEO Metadata
-│   │   ├── globals.css      # Tailwind directives & global dark theme variables
-│   │   └── page.js          # Trang chủ duy nhất (Single Page Portfolio)
-│   ├── components/          # Các component giao diện
-│   │   ├── Header.js
-│   │   ├── Footer.js
-│   │   ├── Hero.js          # Chứa typing animation
-│   │   ├── About.js         # About Me section
-│   │   ├── Timeline.js      # Experience timeline
-│   │   ├── Skills.js        # Skills grid & badges
-│   │   └── Projects.js      # Projects grid (GitHub API + Fallback)
-│   └── data/
-│       └── portfolioData.js # Chuyển đổi từ siteConfig.js cũ sang ES6 module
-├── next.config.js           # Cấu hình Next.js (bắt buộc thêm output: 'export')
-├── tailwind.config.js       # Cấu hình Tailwind (Colors, dark mode)
-├── package.json
-└── jsconfig.json
-```
+## 1. Phân tích Yêu cầu & Định hướng Thiết kế
 
-### 2. Contract dữ liệu (`src/data/portfolioData.js`)
-Dữ liệu sẽ được trích xuất từ `data/siteConfig.js` cũ sang định dạng Javascript ES6 module sạch:
-```javascript
-export const portfolioData = {
-  siteTitle: "Hi! I'm Kinh Thu!",
-  authorName: "Kinh Thu",
-  authorAvatar: "/images/avatar.png",
-  authorDescription: `...`, // HTML string chứa mô tả
-  skills: [
-    { name: 'HTML', level: 80 },
-    ...
-  ],
-  jobs: [
-    {
-      company: "Launch Deck LLC",
-      begin: { month: 'Jun', year: '2019' },
-      duration: null,
-      occupation: "Frontend / Mobile developer",
-      description: "..."
-    },
-    ...
-  ],
-  social: {
-    twitter: "https://twitter.com/Kinh_Thu_",
-    linkedin: "https://www.linkedin.com/in/letruongkinhthu/",
-    github: "https://github.com/kinhthu",
-    email: "letruongkinhthu@gmail.com"
-  }
-}
-```
+### 1.1. Tông màu và Theme (Tươi sáng & Hiện đại)
+*   **Hiện trạng:** Bảng màu mặc định sử dụng màu nền hơi xám nhẹ (`#f8fafc`), nhưng độ tương phản và điểm nhấn chưa thực sự hiện đại và cuốn hút. Có một số vùng sử dụng màu chữ tối chưa rõ ràng.
+*   **Định hướng điều chỉnh:**
+    *   Tối ưu hóa các lớp màu nền: Sử dụng màu trắng tinh tế (`#ffffff`) kết hợp với màu xám dịu nhẹ (`#f8fafc` hoặc `#f1f5f9`) để tạo chiều sâu và cấu trúc rõ ràng cho từng section.
+    *   Thay đổi các biến màu chủ đạo (`--primary`, `--accent`): Sử dụng màu Indigo sắc nét (`#4f46e5` hoặc `#6366f1`) đi kèm màu Cyan sáng (`#06b6d4`) hoặc Emerald để tạo các dải gradient tươi tắn, đại diện cho phong cách thiết kế hiện đại.
+    *   **Không sử dụng Dark Mode** nhưng vẫn áp dụng Glassmorphism (hiệu ứng kính mờ nền trắng `bg-white/70` với viền siêu mảnh `border-white/40`) để tạo cảm giác sang trọng, thoáng đãng.
 
-### 3. Giao diện & Thẩm mỹ (UI/UX)
-- **Theme**: Premium Dark Theme làm mặc định.
-  - Background chính: Dark Slate/Blue (`#0b0f19`).
-  - Text chính: Slate-200 (`#e2e8f0`), Slate-400 (`#94a3b8`).
-  - Accent Color: Indigo-500 (`#6366f1`), Cyan-500 (`#06b6d4`).
-  - Cards: Dark Slate với viền mỏng bóng bẩy (`bg-slate-900/50 backdrop-blur-md border border-slate-800`).
-- **Micro-animations**:
-  - Hiệu ứng gõ chữ (typing animation) trong Hero section sử dụng custom CSS keyframe hoặc thư viện/logic custom đơn giản.
-  - Hover effects: Tăng nhẹ kích thước card, hiệu ứng glow mờ phía dưới card dự án/timeline point.
+### 1.2. Giải quyết Stylesheet Messy (Gọn gàng & Chuẩn hóa)
+*   **Hiện trạng:**
+    *   Có sự không đồng nhất về font chữ: `layout.js` cấu hình font **Geist** (`--font-geist-sans`), nhưng `globals.css` lại hardcode font **Inter** làm mặc định.
+    *   Tồn tại các class Tailwind không hợp lệ trong các file component (như `text-slate-655`, `bg-purple-655` trong `Projects.js` và `Timeline.js`). Các class này làm sai lệch hiển thị màu sắc và gây lộn xộn trong stylesheet.
+*   **Định hướng điều chỉnh:**
+    *   Dọn dẹp `globals.css`, liên kết font mặc định với biến font Geist được truyền từ Layout.
+    *   Tìm và thay thế tất cả các class sai chính tả thành các class Tailwind chuẩn (`text-slate-600`, `bg-purple-600`...).
+    *   Loại bỏ các định nghĩa trùng lặp và tổ chức lại các phần trong file css theo chuẩn: Biến môi trường -> Cấu hình Theme -> Reset cơ bản -> Animations -> Utility classes.
 
-## Hạng mục công việc
-1. **Task 1: Dọn dẹp mã nguồn Gatsby v2 cũ và khởi tạo dự án Next.js mới**
-   - *Mô tả*: Xóa toàn bộ file và thư mục cũ (trừ `.git`, `.gitignore`, `README.md`, và `.agents`/`agents`). Tạo dự án Next.js App Router mới bằng `npx create-next-app@latest . --js --tailwind --eslint --app --src-dir` (sử dụng `-y` và không tương tác).
-   - *Cơ sở nghiệm thu*: Thư mục cũ được dọn dẹp sạch sẽ, dự án Next.js khởi tạo thành công, chạy được `npm run dev`.
-2. **Task 2: Thiết lập cấu trúc thư mục, tệp cấu hình và CSS nền tảng (Dark Theme)**
-   - *Mô tả*: Cấu hình `next.config.js` với `output: 'export'` và `images: { unoptimized: true }` để hỗ trợ GitHub Pages. Thiết lập hệ màu sắc Dark Theme trong `tailwind.config.js` và global styles trong `src/app/globals.css`. Tạo file dữ liệu `src/data/portfolioData.js` và chuyển các ảnh cũ (`avatar.png`, `cover.jpeg`) sang `public/images/`.
-   - *Cơ sở nghiệm thu*: Cấu hình Next.js và Tailwind hoàn thiện. Ứng dụng chạy ở chế độ Dark Theme mặc định. Các file ảnh được nhận diện đúng.
-3. **Task 3: Phát triển Header/Footer, Hero Section và component About Me**
-   - *Mô tả*: Xây dựng Header thanh lịch với các menu anchor link nhảy đến các phần tương ứng, Footer chứa thông tin bản quyền và liên kết mạng xã hội (từ `portfolioData`). Phát triển Hero Section với hiệu ứng gõ chữ ("Do WHAT you LOVE, and LOVE what you DO"). Phát triển About Me hiển thị mô tả bản thân từ `portfolioData`.
-   - *Cơ sở nghiệm thu*: Header/Footer và các Section hiển thị đúng thông tin, hiệu ứng gõ chữ hoạt động mượt mà.
-4. **Task 4: Phát triển Experience Timeline và Skills Section với Badges**
-   - *Mô tả*: Xây dựng component Timeline hiển thị lịch sử nghề nghiệp trực quan, định dạng dạng danh sách dọc sang trọng. Xây dựng Skills section hiển thị các kỹ năng công nghệ bằng các badge kết hợp biểu tượng tương ứng từ `react-icons`.
-   - *Cơ sở nghiệm thu*: Timeline hiển thị đầy đủ 4 công việc cũ theo đúng thứ tự thời gian. Skills hiển thị trực quan dạng grid/badges.
-5. **Task 5: Phát triển Projects/Portfolio Section tích hợp GitHub API**
-   - *Mô tả*: Viết logic gọi GitHub API (`https://api.github.com/users/kinhthu/repos`) để lấy danh sách các repository nổi bật của người dùng `kinhthu`. Thiết kế fallback tĩnh (đọc danh sách repo giả lập hoặc dự án tĩnh từ dữ liệu cấu hình) đề phòng API Rate Limit hoặc lỗi kết nối.
-   - *Cơ sở nghiệm thu*: Các dự án hiển thị dạng Grid Card đẹp mắt. Thử nghiệm ngắt mạng vẫn hiển thị các dự án fallback một cách chuyên nghiệp.
-6. **Task 6: Kiểm thử giao diện responsive, build tối ưu hóa (Static Export) và đẩy code lên git**
-   - *Mô tả*: Kiểm thử hiển thị trên các màn hình di động, máy tính bảng và desktop. Chạy thử lệnh `npm run build` để xuất bản bản dựng tĩnh vào thư mục `out/`. Kiểm tra lỗi biên dịch. Tạo 1 commit duy nhất chứa toàn bộ mã nguồn mới và thực hiện push lên nhánh main.
-   - *Cơ sở nghiệm thu*: Build pass 100%, không cảnh báo nghiêm trọng. Bản xuất tĩnh chạy độc lập ổn định. Commit duy nhất được đẩy thành công lên nhánh remote `main`.
+### 1.3. Căn chỉnh (Centering & Alignment)
+*   **Hiện trạng:**
+    *   Giao diện trên mobile của một số section bị lệch trái hoặc chưa cân đối khi thu nhỏ.
+    *   Tiêu đề của các phần lớn (About, Experience, Skills, Projects) đã có căn giữa nhưng các thành phần nội dung bên dưới (như thẻ card, dòng thời gian, ảnh đại diện) cần được tối ưu hóa để trông cân đối hơn trên mọi kích thước màn hình.
+*   **Định hướng điều chỉnh:**
+    *   **Hero Section:** Căn giữa toàn bộ text và nút bấm trên thiết bị di động (dùng `text-center items-center` trên mobile, `text-left items-start` trên desktop).
+    *   **About Section:** Căn giữa ảnh đại diện và khối thông tin tóm tắt trên mobile.
+    *   **Timeline Section:** Thiết kế lại sơ đồ Timeline. Thay vì chỉ lệch trái, trên màn hình lớn (Desktop), các thẻ công việc sẽ phân bố **đối xứng hai bên đường kẻ giữa** (Alternating timeline layout). Trên Mobile sẽ tự động fallback về dạng thẳng hàng bên trái để dễ đọc.
 
-## Rủi ro & giảm thiểu
-- **Rủi ro 1: Lỗi GitHub Pages do đường dẫn tài nguyên tĩnh hoặc Routing**:
-  - *Mô tả*: GitHub Pages chạy dưới domain con hoặc root, nếu cấu hình Next.js không đúng, file CSS/JS hoặc ảnh có thể bị lỗi 404.
-  - *Giảm thiểu*: Cấu hình `images: { unoptimized: true }` trong `next.config.js` và đảm bảo xuất Static HTML Export đúng cách. Sử dụng các thẻ `img` HTML chuẩn thay cho `next/image` nếu gặp vấn đề với Static Export.
-- **Rủi ro 2: GitHub API Rate Limit**:
-  - *Mô tả*: GitHub giới hạn lượt gọi API ẩn danh (60 req/hour). Nếu người dùng tải trang nhiều lần, phần Projects có thể bị trống.
-  - *Giảm thiểu*: Thiết kế UI hiển thị danh sách các repo tĩnh lưu sẵn làm fallback nếu API trả về lỗi hoặc quá hạn mức.
+### 1.4. Thiết kế các Section & Field sạch sẽ, rõ ràng
+*   **Hiện trạng:** Các vùng giao diện hiển thị thông tin còn khá rời rạc, viền thẻ (card border) và bóng đổ (shadow) chưa đồng nhất. Khối code tượng trưng ở Hero đang hơi tối và khó đọc.
+*   **Định hướng điều chỉnh:**
+    *   Thêm khoảng cách padding dọc (`py-20 md:py-28`) đồng đều cho tất cả các section để tạo "khoảng thở" cho trang web.
+    *   **Card UI:** Thiết kế lại các thẻ card (Kinh nghiệm, Kỹ năng, Dự án) theo phong cách hiện đại: Bo góc lớn hơn (`rounded-2xl` hoặc `rounded-3xl`), đường viền mờ tinh tế (`border border-slate-100`), đổ bóng nhẹ (`shadow-sm hover:shadow-lg`), chuyển động nâng thẻ nhẹ khi hover (`hover:-translate-y-1 transition-all duration-300`).
+    *   **Skills Section:** Các thanh đo phần trăm kỹ năng (`Progress bar`) sẽ được thiết kế mềm mại hơn, hiển thị rõ phần trăm và có hiệu ứng gradient chạy mượt từ trái sang phải.
+    *   **Projects Section:** Cân đối lại kích thước các thẻ project, chuẩn hóa độ cao để tránh bị lệch dòng khi mô tả ngắn dài khác nhau.
 
-## Cách verify end-to-end
-1. **Chạy dev local**: Chạy `npm run dev`, mở trình duyệt truy cập `http://localhost:3000`. Kiểm tra sự hiện diện đầy đủ của các Section (Hero, About, Timeline, Skills, Projects).
-2. **Kiểm tra Responsive**: Sử dụng Chrome DevTools giả lập kích thước Mobile (iPhone SE, Pixel) để xác nhận bố cục không bị vỡ.
-3. **Build tĩnh**: Chạy `npm run build` và xác nhận thư mục `out/` được tạo thành công chứa toàn bộ file `.html`, `.js`, `.css` và tài nguyên hình ảnh.
-4. **Kiểm thử Offline**: Mở trực tiếp file `out/index.html` hoặc chạy máy chủ HTTP tĩnh (ví dụ `npx serve out`) để đảm bảo trang hoạt động offline/không có backend.
+---
+
+## 2. Kế hoạch Triển khai Chi tiết
+
+### Bước 1: Dọn dẹp & Tối ưu hóa `globals.css`
+*   **File tác động:** `src/app/globals.css`
+*   **Công việc cần làm:**
+    *   Đồng bộ font Geist vào font-family của `html, body` bằng cách sử dụng `var(--font-geist-sans)`.
+    *   Tinh chỉnh bảng màu trong phần `:root` sang các tông màu tươi sáng, có độ tương phản cao, hiện đại.
+    *   Viết thêm các class tiện ích dùng chung như `.glass-card` (nền trắng mờ, viền mỏng, đổ bóng) để các component sử dụng đồng nhất.
+
+### Bước 2: Chuẩn hóa Header
+*   **File tác động:** `src/components/Header.js`
+*   **Công việc cần làm:**
+    *   Kiểm tra hiệu ứng đổ bóng và viền mỏng của Header khi cuộn trang (`scrolled = true`), chuyển từ `bg-white/80` sang nền sáng mượt hơn, đảm bảo hài hòa với theme tươi sáng.
+    *   Căn chỉnh khoảng cách các tab điều hướng và các biểu tượng mạng xã hội.
+
+### Bước 3: Tái thiết kế Hero Section & Code Box
+*   **File tác động:** `src/components/Hero.js`
+*   **Công việc cần làm:**
+    *   Đảm bảo toàn bộ chữ, mô tả, nút hành động căn giữa hoàn hảo trên màn hình mobile.
+    *   Tinh chỉnh màu sắc của hộp Code mô phỏng phía bên phải: Thay thế các thẻ màu nền tối hoặc chữ mờ bằng các tông màu sáng hiện đại của các trình soạn thảo code (Light theme code editor style).
+    *   Cập nhật các nút bấm ("View My Work", "My Experience") với gradient tươi sáng và bo góc tròn hiện đại.
+
+### Bước 4: Tinh chỉnh About Section
+*   **File tác động:** `src/components/About.js`
+*   **Công việc cần làm:**
+    *   Căn chỉnh ảnh đại diện (avatar) luôn nằm chính giữa màn hình khi hiển thị trên mobile.
+    *   Cập nhật hiệu ứng cho avatar: Loại bỏ việc đặt filter thang xám (`grayscale`) mặc định (khiến hình ảnh bị u tối), thay bằng ảnh màu tươi sáng tự nhiên, khi hover sẽ tăng nhẹ tỉ lệ thu phóng (`scale-105`) hoặc đổ bóng viền sáng.
+    *   Tái thiết kế khối thống kê nhanh (Quick stats) thành các thẻ nhỏ sáng sủa, cân xứng.
+
+### Bước 5: Refactor Dòng thời gian (Timeline) đối xứng
+*   **File tác động:** `src/components/Timeline.js`
+*   **Công việc cần làm:**
+    *   Thay đổi cách xây dựng timeline:
+        *   Trên Desktop (`md:flex`): Trục đứng nằm chính giữa. Các thẻ kinh nghiệm lẻ sẽ nằm bên trái trục đứng, thẻ chẵn nằm bên phải trục đứng. Điểm mốc tròn nằm ngay trên trục ở giữa.
+        *   Trên Mobile: Fallback về trục lề trái truyền thống để bảo toàn không gian hiển thị.
+    *   Thay thế lớp màu không hợp lệ (`text-slate-655`...) bằng các mã màu tiêu chuẩn.
+
+### Bước 6: Làm sạch Skills Section
+*   **File tác động:** `src/components/Skills.js`
+*   **Công việc cần làm:**
+    *   Cải tiến các thanh phần trăm kỹ năng: Sử dụng thanh tiến trình mỏng hơn, có màu gradient tím-xanh ngọc rực rỡ, nền thanh màu xám nhạt tinh tế.
+    *   Bố trí các thẻ kỹ năng cân đối hơn, cải thiện khoảng cách và viền thẻ.
+
+### Bước 7: Sửa lỗi dự án & Projects Section
+*   **File tác động:** `src/components/Projects.js`
+*   **Công việc cần làm:**
+    *   Thay thế toàn bộ mã màu bị lỗi (`text-slate-655`, `bg-purple-655`...) bằng các class chuẩn của Tailwind.
+    *   Định rõ chiều cao cố định hoặc sử dụng cấu trúc flexbox đồng bộ để tất cả các thẻ project đều nhau chằn chặn.
+    *   Tối ưu hóa các nút liên kết Github và Demo trực quan, sạch sẽ.
+
+### Bước 8: Đồng bộ Footer
+*   **File tác động:** `src/components/Footer.js`
+*   **Công việc cần làm:**
+    *   Đảm bảo footer có nền sáng nhẹ hài hòa, căn chỉnh các thông tin bản quyền và biểu tượng liên hệ thật gọn gàng, cân đối.

@@ -20,7 +20,7 @@ export default function Skills() {
       case "css":
         return <FaCss3Alt className="text-blue-500" size={24} />;
       case "javascript":
-        return <FaJs className="text-yellow-550" size={24} />;
+        return <FaJs className="text-yellow-500" size={24} />;
       case "nodejs":
         return <FaNodeJs className="text-green-600" size={24} />;
       case "react":
@@ -76,9 +76,9 @@ export default function Skills() {
               </div>
 
               {/* Progress Bar Container */}
-              <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden border border-slate-100">
+              <div className="w-full bg-slate-100/80 h-1.5 rounded-full overflow-hidden">
                 <div
-                  className="bg-gradient-to-r from-indigo-600 to-cyan-500 h-full rounded-full transition-all duration-1000 ease-out"
+                  className="bg-gradient-to-r from-indigo-600 via-purple-500 to-cyan-500 h-full rounded-full transition-all duration-1000 ease-out"
                   style={{ width: `${skill.level}%` }}
                 ></div>
               </div>
