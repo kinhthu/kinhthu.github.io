@@ -110,7 +110,7 @@ export default function Projects() {
       case "angular":
         return "bg-red-600";
       case "php":
-        return "bg-purple-655";
+        return "bg-purple-600";
       case "c#":
         return "bg-green-600";
       default:
@@ -198,7 +198,7 @@ export default function Projects() {
                         repo.language
                       )}`}
                     ></span>
-                    <span className="font-semibold text-slate-655">
+                    <span className="font-semibold text-slate-500">
                       {repo.language || "Web"}
                     </span>
                   </div>

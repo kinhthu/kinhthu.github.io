@@ -31,7 +31,7 @@ export default function About() {
                   <img
                     src={portfolioData.authorAvatar}
                     alt={portfolioData.authorName}
-                    className="w-full h-full object-cover grayscale opacity-90 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
               </div>
@@ -53,16 +53,16 @@ export default function About() {
             
             {/* Quick stats grid */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-4">
-              <div className="bg-white/65 border border-slate-200/60 p-4 rounded-2xl text-center shadow-sm">
-                <span className="block text-2xl font-extrabold text-indigo-600">9+</span>
+              <div className="bg-white border border-slate-200/80 hover:border-indigo-600/30 p-5 rounded-2xl text-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                <span className="block text-2xl sm:text-3xl font-extrabold text-indigo-600">9+</span>
                 <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Years Experience</span>
               </div>
-              <div className="bg-white/65 border border-slate-200/60 p-4 rounded-2xl text-center shadow-sm">
-                <span className="block text-2xl font-extrabold text-cyan-600">10+</span>
+              <div className="bg-white border border-slate-200/80 hover:border-indigo-600/30 p-5 rounded-2xl text-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                <span className="block text-2xl sm:text-3xl font-extrabold text-cyan-600">10+</span>
                 <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Major Projects</span>
               </div>
-              <div className="col-span-2 sm:col-span-1 bg-white/65 border border-slate-200/60 p-4 rounded-2xl text-center shadow-sm">
-                <span className="block text-2xl font-extrabold text-purple-600">GPA 8.52</span>
+              <div className="col-span-2 sm:col-span-1 bg-white border border-slate-200/80 hover:border-indigo-600/30 p-5 rounded-2xl text-center shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+                <span className="block text-2xl sm:text-3xl font-extrabold text-purple-600">GPA 8.52</span>
                 <span className="text-xs text-slate-500 uppercase tracking-wider font-semibold">BS in IT (Honors)</span>
               </div>
             </div>
