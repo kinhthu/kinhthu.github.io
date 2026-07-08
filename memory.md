@@ -1,62 +1,47 @@
 # Project Memory - Portfolio Rebuild (Next.js + Tailwind v4)
 
-This file documents the architecture, database/data contracts, APIs, build configuration, and lessons learned from rebuilding the portfolio website.
+## Last Updated
+2026-07-09
 
-## 1. Project Structure
+## Tech Stack
+- Next.js (App Router, React 19)
+- Tailwind CSS v4 (Light theme, Indigo/Cyan accents, light glassmorphism)
+- Node.js (Unit test suite execution)
 
-The project was rebuilt from Gatsby v2 to Next.js App Router using React 19 and Tailwind CSS v4.
+## Key Architecture Decisions
+- **Next.js Transition**: Transitioned the portfolio site from Gatsby v2 to Next.js App Router.
+- **Light Theme Migration**: Adjusted colors and theme variables to a modern light theme with high contrast, slate background, and clear section dividers.
+- **Alternating Timeline**: Experience timeline alternates left and right on desktop screens while falling back to left-aligned on mobile.
+- **Design Tokens**: Standardized CSS variables and Tailwind classes.
 
-`
-D:\workspace\wt-d4cb3a31912044bdb7fd7ae3cab0c7a9
-├── .agents/
-│   └── mcp_config.json      # Control plane configuration
-├── public/
-│   └── images/              # Static image assets (avatar.png, cover.jpeg)
-├── src/
-│   ├── app/
-│   │   ├── layout.js        # Root layout, Inter font, metadata configuration
-│   │   ├── globals.css      # Tailwind directives & CSS variable definitions
-│   │   └── page.js          # Main single-page portfolio layout assembling all components
-│   ├── components/          # Reusable presentation components
-│   │   ├── Header.js        # Sticky header with active section highlighting
-│   │   ├── Footer.js        # Standard copyright and social links
-│   │   ├── Hero.js          # Hero introduction with a custom typing animation
-│   │   ├── About.js         # Text biography segment
-│   │   ├── Timeline.js      # Interactive experience timeline
-│   │   ├── Skills.js        # Tech stack grid with interactive badges
-│   │   └── Projects.js      # Projects grid with dynamic GitHub API integration & static fallback
-│   └── data/
-│       └── portfolioData.js # Main static portfolio dataset (ES6 module)
-├── next.config.mjs           # Next.js config (configured for static export)
-├── postcss.config.mjs        # PostCSS configuration for Tailwind CSS v4
-├── tailwind.config.js       # Tailwind configuration file
-├── jsconfig.json            # Path alias configs (@/* maps to src/*)
-└── eslint.config.mjs        # ESLint configuration
-`
+## Key Files Map
+- `src/app/globals.css`: Contains CSS rules, design tokens, variables, and animations.
+- `src/components/Timeline.js`: Interactive experience timeline component.
+- `src/components/About.js`: Biography and quick stats component.
+- `src/components/Hero.js`: Hero section and typing animation.
+- `src/components/Projects.js`: Portfolio and GitHub repos section.
+- `src/components/Header.js`: Navigation header.
+- `src/components/Footer.js`: Footer section.
 
-## 2. Data Contract (portfolioData.js)
+## Recent Schema Changes
+No database schema exists. Static data is loaded from `src/data/portfolioData.js`.
 
-All static data (bio, jobs, skills, social links) is exported from src/data/portfolioData.js as an ES6 module:
-- githubUsername: String used to query the GitHub API.
-- skills: Array of { name, level } to map to badge rendering.
-- jobs: Array of { company, begin, duration, occupation, description } representing experience history.
-- social: Object mapping profiles (Twitter, LinkedIn, GitHub, email) to URLs.
+## API Contracts
+Static data model imports and GitHub API public repository list fetch endpoint.
 
-## 3. API Integrations
-
-### GitHub API integration (Projects.js)
-- **Endpoint**: https://api.github.com/users/{username}/repos?sort=updated&per_page=30
-- **Logic**: Filters out forked repositories, sorts by stargazers count descending, and displays the top 6 repos.
-- **Robust Fallback**: If the API request fails (due to network issues or GitHub API Rate Limiting), it automatically falls back to rendering a hardcoded array of curated projects (allbackRepos) with a graceful debug console log.
+## Pitfalls & Lessons
+- **Tailwind v4 Configuration**: PostCSS config is critical for correct compilation of CSS in Tailwind v4.
+- **GitHub API Rate Limits**: Always keep static fallbacks for GitHub API calls because rate limits are easily hit on shared runners.
 
 ## 4. UI/UX Specifications
 
-- **Theme**: Premium Dark Theme (#0b0f19 canvas, #1e293b cards with fine border highlights and glassmorphism styling).
+- **Theme**: Premium Bright/Light Theme (#f8fafc canvas, #ffffff cards with fine border highlights and light glassmorphism styling).
 - **Interactive States**:
   - Desktop-sticky header with active scroll highlighting.
   - Hover effects on cards (scale transitions, outline highlights).
   - CSS Keyframe custom Typing Animation in the Hero component.
 - **Responsive Layout**: Designed mobile-first using Tailwind flex/grid layout helpers to adapt cleanly to Mobile, Tablet, and Desktop screen widths.
+
 
 ## 5. Build and Custom Deployment
 

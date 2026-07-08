@@ -4,59 +4,59 @@ import { useState, useEffect } from "react";
 import { FaGithub, FaStar, FaCodeBranch, FaExternalLinkAlt, FaFolder } from "react-icons/fa";
 import { portfolioData } from "@/data/portfolioData";
 
+// Curated fallback repositories in case GitHub API fails/rate-limits
+const fallbackRepos = [
+  {
+    id: "fallback-1",
+    name: "gotruckster",
+    description: "Catering food truck ordering and booking website in the US. Built using React, Next.js, and Google Maps API.",
+    html_url: "https://gotruckster.com/",
+    stargazers_count: 12,
+    forks_count: 3,
+    language: "JavaScript",
+  },
+  {
+    id: "fallback-2",
+    name: "tickettamer",
+    description: "Law ticket clearing web application helping users resolve traffic tickets and legal issues in various states.",
+    html_url: "https://tickettamer.com/",
+    stargazers_count: 8,
+    forks_count: 2,
+    language: "React",
+  },
+  {
+    id: "fallback-3",
+    name: "urgentadmin",
+    description: "Healthcare emergency dispatch coordination platform and mobile app with real-time tracking and scheduling.",
+    html_url: "https://urgentadmin.com/preview",
+    stargazers_count: 15,
+    forks_count: 4,
+    language: "Angular",
+  },
+  {
+    id: "fallback-4",
+    name: "gatsby-starter-cv",
+    description: "A clean and modern CV/Resume static website starter theme built using Gatsby, React, and styled-components.",
+    html_url: `https://github.com/${portfolioData.githubUsername}/gatsby-starter-cv`,
+    stargazers_count: 24,
+    forks_count: 9,
+    language: "JavaScript",
+  },
+  {
+    id: "fallback-5",
+    name: "honey-farm-manager",
+    description: "Mobile application to manage honey from farm harvesting, laboratory analysis, to packaging tracking.",
+    html_url: `https://github.com/${portfolioData.githubUsername}`,
+    stargazers_count: 5,
+    forks_count: 1,
+    language: "TypeScript",
+  }
+];
+
 export default function Projects() {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isFallback, setIsFallback] = useState(false);
-
-  // Curated fallback repositories in case GitHub API fails/rate-limits
-  const fallbackRepos = [
-    {
-      id: "fallback-1",
-      name: "gotruckster",
-      description: "Catering food truck ordering and booking website in the US. Built using React, Next.js, and Google Maps API.",
-      html_url: "https://gotruckster.com/",
-      stargazers_count: 12,
-      forks_count: 3,
-      language: "JavaScript",
-    },
-    {
-      id: "fallback-2",
-      name: "tickettamer",
-      description: "Law ticket clearing web application helping users resolve traffic tickets and legal issues in various states.",
-      html_url: "https://tickettamer.com/",
-      stargazers_count: 8,
-      forks_count: 2,
-      language: "React",
-    },
-    {
-      id: "fallback-3",
-      name: "urgentadmin",
-      description: "Healthcare emergency dispatch coordination platform and mobile app with real-time tracking and scheduling.",
-      html_url: "https://urgentadmin.com/preview",
-      stargazers_count: 15,
-      forks_count: 4,
-      language: "Angular",
-    },
-    {
-      id: "fallback-4",
-      name: "gatsby-starter-cv",
-      description: "A clean and modern CV/Resume static website starter theme built using Gatsby, React, and styled-components.",
-      html_url: `https://github.com/${portfolioData.githubUsername}/gatsby-starter-cv`,
-      stargazers_count: 24,
-      forks_count: 9,
-      language: "JavaScript",
-    },
-    {
-      id: "fallback-5",
-      name: "honey-farm-manager",
-      description: "Mobile application to manage honey from farm harvesting, laboratory analysis, to packaging tracking.",
-      html_url: `https://github.com/${portfolioData.githubUsername}`,
-      stargazers_count: 5,
-      forks_count: 1,
-      language: "TypeScript",
-    }
-  ];
 
   useEffect(() => {
     const fetchRepos = async () => {

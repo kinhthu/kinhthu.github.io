@@ -37,7 +37,7 @@ export default function Hero() {
           </span>
           
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-slate-900 leading-none">
-            Hi, I'm{" "}
+            {"Hi, I'm "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600">
               {portfolioData.authorName}
             </span>
@@ -110,18 +110,18 @@ export default function Hero() {
               
               <div className="font-mono text-xs sm:text-sm text-slate-700 space-y-2 mt-4 flex-grow select-none">
                 <p><span className="text-indigo-600 font-semibold">const</span> developer = &#123;</p>
-                <p className="pl-4">name: <span className="text-emerald-600">"{portfolioData.authorName}"</span>,</p>
-                <p className="pl-4">role: <span className="text-emerald-600">"Frontend & Mobile"</span>,</p>
+                <p className="pl-4">name: <span className="text-emerald-600">{"\""}{portfolioData.authorName}{"\""}</span>,</p>
+                <p className="pl-4">role: <span className="text-emerald-600">{"\"Frontend & Mobile\""}</span>,</p>
                 <p className="pl-4">skills: [</p>
-                <p className="pl-8"><span className="text-cyan-600">"React"</span>, <span className="text-cyan-600">"Next.js"</span>,</p>
-                <p className="pl-8"><span className="text-cyan-600">"TailwindCSS"</span>, <span className="text-cyan-600">"Native"</span></p>
+                <p className="pl-8"><span className="text-cyan-600">{"\"React\""}</span>, <span className="text-cyan-600">{"\"Next.js\""}</span>,</p>
+                <p className="pl-8"><span className="text-cyan-600">{"\"TailwindCSS\""}</span>, <span className="text-cyan-600">{"\"Native\""}</span></p>
                 <p className="pl-4">],</p>
                 <p className="pl-4">passionate: <span className="text-indigo-600">true</span></p>
                 <p>&#125;;</p>
               </div>
 
               <div className="border-t border-slate-100 pt-4 flex items-center justify-between">
-                <span className="text-xs font-mono text-slate-400">// Made with ❤️</span>
+                <span className="text-xs font-mono text-slate-400">{"// Made with ❤️"}</span>
                 <span className="text-xs font-mono text-indigo-600 font-semibold">9+ Yrs Exp</span>
               </div>
             </div>
