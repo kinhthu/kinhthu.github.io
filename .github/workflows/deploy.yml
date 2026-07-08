@@ -65,6 +65,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
-          publish_branch: main
+          publish_branch: gh-pages
           cname: "" # Clean cname to default to username.github.io
 
