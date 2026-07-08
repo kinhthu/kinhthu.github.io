@@ -17,9 +17,9 @@
 name: Deploy Portfolio to GitHub Pages
 
 on:
-  # push:
-  #   branches:
-  #     - main
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -65,6 +65,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./out
-          publish_branch: gh-pages
+          publish_branch: main
           cname: "" # Clean cname to default to username.github.io
 
