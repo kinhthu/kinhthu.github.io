@@ -1,59 +1,43 @@
-# Project Memory - Portfolio Rebuild (Next.js + Tailwind v4)
+# memory.md
 
-## Last Updated
-2026-07-09
+## [META] Last Updated
+- Run ID: 2f1b5645-391d-42dc-9ce1-94cb9b1f7f04 | Date: 2026-07-09 | Leader: Antigravity
 
-## Tech Stack
-- Next.js (App Router, React 19)
-- Tailwind CSS v4 (Light theme, Indigo/Cyan accents, light glassmorphism)
-- Node.js (Unit test suite execution)
+## [TECH] Tech Stack
+- Language: JavaScript / ES6 | Framework: Next.js (App Router, React 19) | DB: None | Test: None
+- Build: `npm run build` | Test: None | Lint: `npm run lint`
+- Key libs: tailwindcss (v4), postcss, react-icons
 
-## Key Architecture Decisions
+## [ARCH] Key Architecture Decisions
 - **Next.js Transition**: Transitioned the portfolio site from Gatsby v2 to Next.js App Router.
 - **Light Theme Migration**: Adjusted colors and theme variables to a modern light theme with high contrast, slate background, and clear section dividers.
 - **Alternating Timeline**: Experience timeline alternates left and right on desktop screens while falling back to left-aligned on mobile.
-- **Design Tokens**: Standardized CSS variables and Tailwind classes.
+- **Static HTML Export**: Configured via `output: 'export'` and `unoptimized: true` in `next.config.mjs` to run on GitHub Pages.
+- **GitHub Pages Deployment Workflows**:
+  - **Mode A (deploy.yml)**: Deploy from the `gh-pages` branch using `peaceiris/actions-gh-pages@v4`. Push trigger disabled to avoid race conditions.
+  - **Mode B (nextjs.yml)**: Deploy directly via GitHub Actions (`actions/deploy-pages@v5`). Active on push to `main` branch.
 
-## Key Files Map
-- `src/app/globals.css`: Contains CSS rules, design tokens, variables, and animations.
-- `src/components/Timeline.js`: Interactive experience timeline component.
-- `src/components/About.js`: Biography and quick stats component.
-- `src/components/Hero.js`: Hero section and typing animation.
-- `src/components/Projects.js`: Portfolio and GitHub repos section.
-- `src/components/Header.js`: Navigation header.
-- `src/components/Footer.js`: Footer section.
+## [FILES] Key Files Map
+| File | Purpose |
+|---|---|
+| `next.config.mjs` | Next.js configuration containing static HTML export settings. |
+| `.github/workflows/nextjs.yml` | Recommended workflow for direct deployment via GitHub Actions. |
+| `.github/workflows/deploy.yml` | Alternative workflow for deployment from the `gh-pages` branch. |
+| `scripts/deploy.js` | Custom script to compile and push built assets to `gh-pages` branch. |
+| `src/app/globals.css` | Global styles, typography, Tailwind v4 imports, and animations. |
+| `src/data/portfolioData.js` | Static data loaded into components (Timeline, Projects, etc.). |
 
-## Recent Schema Changes
-No database schema exists. Static data is loaded from `src/data/portfolioData.js`.
+## [DB] Recent Schema Changes
+No database schema exists. Data is loaded statically.
 
-## API Contracts
+## [API] API/Service Contracts
 Static data model imports and GitHub API public repository list fetch endpoint.
 
-## Pitfalls & Lessons
-- **Tailwind v4 Configuration**: PostCSS config is critical for correct compilation of CSS in Tailwind v4.
-- **GitHub API Rate Limits**: Always keep static fallbacks for GitHub API calls because rate limits are easily hit on shared runners.
+## [GOTCHAS] Known Pitfalls & Lessons
+- **[CRITICAL] Cache key glob segment**: In `@actions/glob`, standard `**/*.ext` must be used recursively. Root wildcards like `**.[jt]s` will not recurse subdirectories, leading to stale build cache.
+- **[HIGH] Concurrent deployments**: Avoid having push triggers active in both `deploy.yml` and `nextjs.yml` to prevent race conditions on GitHub Pages environment.
+- **[MEDIUM] Tailwind v4 Configuration**: PostCSS config is critical for correct compilation of CSS in Tailwind v4.
+- **[MEDIUM] GitHub API Rate Limits**: Always keep static fallbacks for GitHub API calls because rate limits are easily hit on shared runners.
 
-## 4. UI/UX Specifications
-
-- **Theme**: Premium Bright/Light Theme (#f8fafc canvas, #ffffff cards with fine border highlights and light glassmorphism styling).
-- **Interactive States**:
-  - Desktop-sticky header with active scroll highlighting.
-  - Hover effects on cards (scale transitions, outline highlights).
-  - CSS Keyframe custom Typing Animation in the Hero component.
-- **Responsive Layout**: Designed mobile-first using Tailwind flex/grid layout helpers to adapt cleanly to Mobile, Tablet, and Desktop screen widths.
-
-
-## 5. Build and Custom Deployment
-
-- **Static HTML Export**:
-  - Configured via output: 'export' in 
-ext.config.mjs.
-  - Configured images: { unoptimized: true } to bypass the Next.js production image optimizer requirement since the output needs to run as static HTML on GitHub Pages.
-- **Production Build**: Compiles successfully using 
-pm run build resulting in HTML/JS/CSS assets written to the out/ directory.
-
-## 6. Lessons Learned & Guidelines
-
-1. **Tailwind CSS v4 Configuration**: Tailwind v4 uses @import 'tailwindcss'; in CSS and PostCSS config instead of the legacy 	ailwind.config.js template list files. Ensure correct PostCSS config to build CSS correctly.
-2. **Dynamic GitHub API**: Always keep local static fallbacks for GitHub API calls because anonymous requests on shared server runners easily hit the 60 requests/hour rate limit.
-3. **Static Output**: With static HTML exports, client-side routing and relative assets must be clean, and Next.js Image component optimization must be deactivated (unoptimized: true).
+## [PERF] Performance Notes
+- Next.js compilation cache (.next/cache) is saved and restored to speed up GitHub Actions builds.

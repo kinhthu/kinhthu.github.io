@@ -1,98 +1,44 @@
-# Kế hoạch Kỹ thuật: Điều chỉnh Giao diện và Góp phần Tối ưu hóa Stylesheet
-## Kinh Thu Portfolio Redesign
+I will start by checking the current permissions to see which paths I have access to. This will help me locate the workspace directory and inspect the codebase.
+I will list the contents of the `C:\Users\letru\.gemini\antigravity-cli\scratch` directory to see if there is an existing project workspace setup there.
+I will list the contents of the `game-hub` directory to see if that's the site we are working with and to understand its project structure.
+I will list the contents of the `temp_workspace_files` directory to see if it contains project source files.
+I will check the content of `project_context.json` to see if it lists project information or repository path details.
+I will check the existing `architect_plan.md` in the scratch directory to see if there is an existing plan or project context documented there.
+I will run `git status` in the scratch directory to determine if it is a Git repository, and if so, check its current status.
+I will check if the `temp_workspace_files` directory is a Git repository.
+I will view the first 100 lines of `C:\Users\letru\.gemini\antigravity-cli\scratch\temp_workspace_files\index.html` to understand what the site is about.
+I will run a command to find the current working directory of the process. This will confirm the exact path of the workspace.
+I will list the contents of the `static_backup` directory to see what is stored inside it.
+I will view the rest of `index.html` to check how Javascript scripts are loaded, to ensure their paths are relative and suitable for GitHub Pages deployment.
+I will check the first 100 lines of `main.js` to see if there are any references or hardcoded URLs that might fail when deployed on GitHub Pages.
+I will check if there are any references to external files or images (like `url(...)`) in `style.css` that we need to be aware of for deployment.
+I will run a PowerShell command to search for any `url(` occurrences in `style.css` to see if there are background image dependencies.
+I will write the comprehensive technical plan for deploying the static website to GitHub Pages into `architect_plan.md` in the workspace. This plan outlines repository setup, deployment methods (Direct Branch vs GitHub Actions), and a pre-launch validation checklist.
+I will write the technical plan to `C:\Users\letru\.gemini\antigravity-cli\scratch\architect_plan.md` without providing artifact metadata, since this is a workspace file. Then, I will copy it to the system artifacts directory so it renders in the user interface.
+I will also create the file in the artifacts directory (`C:\Users\letru\.gemini\antigravity-cli\brain\3d25e15f-965d-4dcf-b3b9-5c89aebdad42\architect_plan.md`) with the appropriate metadata so that it renders as an artifact in the user interface.
+I have analyzed the requirements for setting up GitHub Pages for this site and generated a comprehensive technical plan.
 
-Tài liệu này trình bày phân tích yêu cầu và kế hoạch kỹ thuật chi tiết để điều chỉnh giao diện của trang portfolio cá nhân. Mục tiêu là làm cho giao diện tươi sáng, hiện đại (không dùng dark mode mặc định), tổ chức lại stylesheet gọn gàng, căn chỉnh lại các phần tử (centering) hợp lý và tối ưu hóa UI của các section/field.
+The technical plan has been written to the workspace at [architect_plan.md](file:///C:/Users/letru/.gemini/antigravity-cli/scratch/architect_plan.md). I have also created a formatted user-facing artifact version of the plan.
 
----
-
-## 1. Phân tích Yêu cầu & Định hướng Thiết kế
-
-### 1.1. Tông màu và Theme (Tươi sáng & Hiện đại)
-*   **Hiện trạng:** Bảng màu mặc định sử dụng màu nền hơi xám nhẹ (`#f8fafc`), nhưng độ tương phản và điểm nhấn chưa thực sự hiện đại và cuốn hút. Có một số vùng sử dụng màu chữ tối chưa rõ ràng.
-*   **Định hướng điều chỉnh:**
-    *   Tối ưu hóa các lớp màu nền: Sử dụng màu trắng tinh tế (`#ffffff`) kết hợp với màu xám dịu nhẹ (`#f8fafc` hoặc `#f1f5f9`) để tạo chiều sâu và cấu trúc rõ ràng cho từng section.
-    *   Thay đổi các biến màu chủ đạo (`--primary`, `--accent`): Sử dụng màu Indigo sắc nét (`#4f46e5` hoặc `#6366f1`) đi kèm màu Cyan sáng (`#06b6d4`) hoặc Emerald để tạo các dải gradient tươi tắn, đại diện cho phong cách thiết kế hiện đại.
-    *   **Không sử dụng Dark Mode** nhưng vẫn áp dụng Glassmorphism (hiệu ứng kính mờ nền trắng `bg-white/70` với viền siêu mảnh `border-white/40`) để tạo cảm giác sang trọng, thoáng đãng.
-
-### 1.2. Giải quyết Stylesheet Messy (Gọn gàng & Chuẩn hóa)
-*   **Hiện trạng:**
-    *   Có sự không đồng nhất về font chữ: `layout.js` cấu hình font **Geist** (`--font-geist-sans`), nhưng `globals.css` lại hardcode font **Inter** làm mặc định.
-    *   Tồn tại các class Tailwind không hợp lệ trong các file component (như `text-slate-655`, `bg-purple-655` trong `Projects.js` và `Timeline.js`). Các class này làm sai lệch hiển thị màu sắc và gây lộn xộn trong stylesheet.
-*   **Định hướng điều chỉnh:**
-    *   Dọn dẹp `globals.css`, liên kết font mặc định với biến font Geist được truyền từ Layout.
-    *   Tìm và thay thế tất cả các class sai chính tả thành các class Tailwind chuẩn (`text-slate-600`, `bg-purple-600`...).
-    *   Loại bỏ các định nghĩa trùng lặp và tổ chức lại các phần trong file css theo chuẩn: Biến môi trường -> Cấu hình Theme -> Reset cơ bản -> Animations -> Utility classes.
-
-### 1.3. Căn chỉnh (Centering & Alignment)
-*   **Hiện trạng:**
-    *   Giao diện trên mobile của một số section bị lệch trái hoặc chưa cân đối khi thu nhỏ.
-    *   Tiêu đề của các phần lớn (About, Experience, Skills, Projects) đã có căn giữa nhưng các thành phần nội dung bên dưới (như thẻ card, dòng thời gian, ảnh đại diện) cần được tối ưu hóa để trông cân đối hơn trên mọi kích thước màn hình.
-*   **Định hướng điều chỉnh:**
-    *   **Hero Section:** Căn giữa toàn bộ text và nút bấm trên thiết bị di động (dùng `text-center items-center` trên mobile, `text-left items-start` trên desktop).
-    *   **About Section:** Căn giữa ảnh đại diện và khối thông tin tóm tắt trên mobile.
-    *   **Timeline Section:** Thiết kế lại sơ đồ Timeline. Thay vì chỉ lệch trái, trên màn hình lớn (Desktop), các thẻ công việc sẽ phân bố **đối xứng hai bên đường kẻ giữa** (Alternating timeline layout). Trên Mobile sẽ tự động fallback về dạng thẳng hàng bên trái để dễ đọc.
-
-### 1.4. Thiết kế các Section & Field sạch sẽ, rõ ràng
-*   **Hiện trạng:** Các vùng giao diện hiển thị thông tin còn khá rời rạc, viền thẻ (card border) và bóng đổ (shadow) chưa đồng nhất. Khối code tượng trưng ở Hero đang hơi tối và khó đọc.
-*   **Định hướng điều chỉnh:**
-    *   Thêm khoảng cách padding dọc (`py-20 md:py-28`) đồng đều cho tất cả các section để tạo "khoảng thở" cho trang web.
-    *   **Card UI:** Thiết kế lại các thẻ card (Kinh nghiệm, Kỹ năng, Dự án) theo phong cách hiện đại: Bo góc lớn hơn (`rounded-2xl` hoặc `rounded-3xl`), đường viền mờ tinh tế (`border border-slate-100`), đổ bóng nhẹ (`shadow-sm hover:shadow-lg`), chuyển động nâng thẻ nhẹ khi hover (`hover:-translate-y-1 transition-all duration-300`).
-    *   **Skills Section:** Các thanh đo phần trăm kỹ năng (`Progress bar`) sẽ được thiết kế mềm mại hơn, hiển thị rõ phần trăm và có hiệu ứng gradient chạy mượt từ trái sang phải.
-    *   **Projects Section:** Cân đối lại kích thước các thẻ project, chuẩn hóa độ cao để tránh bị lệch dòng khi mô tả ngắn dài khác nhau.
+### Key Points of the Plan
+1. **Directory Restructuring**: Copy the static site files ([index.html](file:///C:/Users/letru/.gemini/antigravity-cli/scratch/temp_workspace_files/index.html), [style.css](file:///C:/Users/letru/.gemini/antigravity-cli/scratch/temp_workspace_files/style.css), [main.js](file:///C:/Users/letru/.gemini/antigravity-cli/scratch/temp_workspace_files/main.js), and [tictactoe.js](file:///C:/Users/letru/.gemini/antigravity-cli/scratch/temp_workspace_files/tictactoe.js)) to a dedicated folder `mini-game-hub` to initialize a Git repository.
+2. **Deployment Options**:
+   * **Method A (Recommended)**: Direct deployment from the root of the `main` branch (simplest setup).
+   * **Method B**: Deployment using a custom GitHub Actions CI/CD workflow (standard for automated releases).
+3. **Verification**: A checklist to prevent typical static hosting errors (e.g., file path case-sensitivity issues, absolute vs. relative routing paths).
 
 ---
 
-## 2. Kế hoạch Triển khai Chi tiết
+### Questions & Decisions
+To proceed with executing the setup, please clarify:
+1. **Deployment Method**: Would you prefer **Method A** (direct branch deployment from the GitHub Settings UI) or **Method B** (using a GitHub Actions `.yml` workflow)?
+2. **GitHub Repository Info**: What is your GitHub username and preferred repository name so we can configure the remote URL?
 
-### Bước 1: Dọn dẹp & Tối ưu hóa `globals.css`
-*   **File tác động:** `src/app/globals.css`
-*   **Công việc cần làm:**
-    *   Đồng bộ font Geist vào font-family của `html, body` bằng cách sử dụng `var(--font-geist-sans)`.
-    *   Tinh chỉnh bảng màu trong phần `:root` sang các tông màu tươi sáng, có độ tương phản cao, hiện đại.
-    *   Viết thêm các class tiện ích dùng chung như `.glass-card` (nền trắng mờ, viền mỏng, đổ bóng) để các component sử dụng đồng nhất.
+---
 
-### Bước 2: Chuẩn hóa Header
-*   **File tác động:** `src/components/Header.js`
-*   **Công việc cần làm:**
-    *   Kiểm tra hiệu ứng đổ bóng và viền mỏng của Header khi cuộn trang (`scrolled = true`), chuyển từ `bg-white/80` sang nền sáng mượt hơn, đảm bảo hài hòa với theme tươi sáng.
-    *   Căn chỉnh khoảng cách các tab điều hướng và các biểu tượng mạng xã hội.
+### Summary of Work
+* Checked permissions and confirmed process location is `C:\Users\letru\.gemini\antigravity-cli\scratch`.
+* Inspected project files inside `temp_workspace_files` to verify they are static assets with relative path imports suitable for subfolder hosting.
+* Created the technical plan and saved it to the workspace at [architect_plan.md](file:///C:/Users/letru/.gemini/antigravity-cli/scratch/architect_plan.md).
+* Generated the user-facing artifact for the deployment guide.
 
-### Bước 3: Tái thiết kế Hero Section & Code Box
-*   **File tác động:** `src/components/Hero.js`
-*   **Công việc cần làm:**
-    *   Đảm bảo toàn bộ chữ, mô tả, nút hành động căn giữa hoàn hảo trên màn hình mobile.
-    *   Tinh chỉnh màu sắc của hộp Code mô phỏng phía bên phải: Thay thế các thẻ màu nền tối hoặc chữ mờ bằng các tông màu sáng hiện đại của các trình soạn thảo code (Light theme code editor style).
-    *   Cập nhật các nút bấm ("View My Work", "My Experience") với gradient tươi sáng và bo góc tròn hiện đại.
-
-### Bước 4: Tinh chỉnh About Section
-*   **File tác động:** `src/components/About.js`
-*   **Công việc cần làm:**
-    *   Căn chỉnh ảnh đại diện (avatar) luôn nằm chính giữa màn hình khi hiển thị trên mobile.
-    *   Cập nhật hiệu ứng cho avatar: Loại bỏ việc đặt filter thang xám (`grayscale`) mặc định (khiến hình ảnh bị u tối), thay bằng ảnh màu tươi sáng tự nhiên, khi hover sẽ tăng nhẹ tỉ lệ thu phóng (`scale-105`) hoặc đổ bóng viền sáng.
-    *   Tái thiết kế khối thống kê nhanh (Quick stats) thành các thẻ nhỏ sáng sủa, cân xứng.
-
-### Bước 5: Refactor Dòng thời gian (Timeline) đối xứng
-*   **File tác động:** `src/components/Timeline.js`
-*   **Công việc cần làm:**
-    *   Thay đổi cách xây dựng timeline:
-        *   Trên Desktop (`md:flex`): Trục đứng nằm chính giữa. Các thẻ kinh nghiệm lẻ sẽ nằm bên trái trục đứng, thẻ chẵn nằm bên phải trục đứng. Điểm mốc tròn nằm ngay trên trục ở giữa.
-        *   Trên Mobile: Fallback về trục lề trái truyền thống để bảo toàn không gian hiển thị.
-    *   Thay thế lớp màu không hợp lệ (`text-slate-655`...) bằng các mã màu tiêu chuẩn.
-
-### Bước 6: Làm sạch Skills Section
-*   **File tác động:** `src/components/Skills.js`
-*   **Công việc cần làm:**
-    *   Cải tiến các thanh phần trăm kỹ năng: Sử dụng thanh tiến trình mỏng hơn, có màu gradient tím-xanh ngọc rực rỡ, nền thanh màu xám nhạt tinh tế.
-    *   Bố trí các thẻ kỹ năng cân đối hơn, cải thiện khoảng cách và viền thẻ.
-
-### Bước 7: Sửa lỗi dự án & Projects Section
-*   **File tác động:** `src/components/Projects.js`
-*   **Công việc cần làm:**
-    *   Thay thế toàn bộ mã màu bị lỗi (`text-slate-655`, `bg-purple-655`...) bằng các class chuẩn của Tailwind.
-    *   Định rõ chiều cao cố định hoặc sử dụng cấu trúc flexbox đồng bộ để tất cả các thẻ project đều nhau chằn chặn.
-    *   Tối ưu hóa các nút liên kết Github và Demo trực quan, sạch sẽ.
-
-### Bước 8: Đồng bộ Footer
-*   **File tác động:** `src/components/Footer.js`
-*   **Công việc cần làm:**
-    *   Đảm bảo footer có nền sáng nhẹ hài hòa, căn chỉnh các thông tin bản quyền và biểu tượng liên hệ thật gọn gàng, cân đối.
