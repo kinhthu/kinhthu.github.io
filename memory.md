@@ -1,7 +1,7 @@
 # memory.md
 
 ## [META] Last Updated
-- Run ID: 2f1b5645-391d-42dc-9ce1-94cb9b1f7f04 | Date: 2026-07-09 | Leader: Antigravity
+- Run ID: 629b4bc8-e412-468b-8f3e-5eb999703201 | Date: 2026-07-09 | Leader: Antigravity
 
 ## [TECH] Tech Stack
 - Language: JavaScript / ES6 | Framework: Next.js (App Router, React 19) | DB: None | Test: None
@@ -11,6 +11,7 @@
 ## [ARCH] Key Architecture Decisions
 - **Next.js Transition**: Transitioned the portfolio site from Gatsby v2 to Next.js App Router.
 - **Light Theme Migration**: Adjusted colors and theme variables to a modern light theme with high contrast, slate background, and clear section dividers.
+- **Fixed Background Image**: Implemented a fixed background image using CSS pseudo-elements `body::before` and `body::after` in `globals.css` with a high-readability semi-transparent light gradient overlay. This achieves sleek visual depth without blocking user pointer events or compromising light-theme readability.
 - **Alternating Timeline**: Experience timeline alternates left and right on desktop screens while falling back to left-aligned on mobile.
 - **Static HTML Export**: Configured via `output: 'export'` and `unoptimized: true` in `next.config.mjs` to run on GitHub Pages.
 - **GitHub Pages Deployment Workflows**:
@@ -26,6 +27,7 @@
 | `scripts/deploy.js` | Custom script to compile and push built assets to `gh-pages` branch. |
 | `src/app/globals.css` | Global styles, typography, Tailwind v4 imports, and animations. |
 | `src/data/portfolioData.js` | Static data loaded into components (Timeline, Projects, etc.). |
+| `public/images/cover.jpeg` | Background image asset used for the fixed body background. |
 
 ## [DB] Recent Schema Changes
 No database schema exists. Data is loaded statically.
